@@ -1,0 +1,69 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Antipublic.Views"
+        xmlns:ViewModels="clr-namespace:Antipublic.ViewModels" x:Class="Antipublic.Views.MainWindow"
+        mc:Ignorable="d"
+        Title="TxtLAP by Poruchik" Height="450" Width="350">
+    <Window.DataContext>
+        <ViewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid Height="86" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="28"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="47"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="10,10,5,0" Text="АП:" VerticalAlignment="Top" FontSize="14" Height="20"/>
+            <TextBox Height="23" Margin="0,7,0,0" VerticalAlignment="Top" FontSize="14" Text="{Binding AntipublicDirectoryPath}" Grid.Column="1"/>
+            <Button Content="..." Margin="5,7,0,0" VerticalAlignment="Top" FontSize="14" Command="{Binding OpenAntipublicCommand}" Grid.Column="2" HorizontalAlignment="Left" Width="30" Height="23"/>
+
+            <TextBlock Margin="10,8,5,0" Text="База:" VerticalAlignment="Top" FontSize="14" Height="20" Grid.Row="1"/>
+            <TextBox Height="23" Margin="0,5,0,0" VerticalAlignment="Top" FontSize="14" Text="{Binding BaseFilePath}" Grid.Column="1" Grid.Row="1"/>
+            <Button Content="..." Margin="5,5,0,0" FontSize="14" Command="{Binding OpenBaseCommand}" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Width="30" Height="23" VerticalAlignment="Top"/>
+
+            <TextBlock Margin="10,5,5,0" Grid.Row="2" TextWrapping="Wrap" Text="Результат:" VerticalAlignment="Top" Height="23" FontSize="14"/>
+            <TextBox Height="23" Margin="0,5,0,0" VerticalAlignment="Top" FontSize="14" Text="{Binding ResultFilePath}" Grid.Column="1" Grid.Row="2"/>
+            <Button Content="..." Margin="5,5,0,0" FontSize="14" Command="{Binding SaveResultCommand}" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Width="30" Height="23" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Margin="0,86,0,0" Height="86" VerticalAlignment="Top">
+            <ComboBox HorizontalAlignment="Left" Margin="88,10,0,0" VerticalAlignment="Top" FontSize="14" SelectedIndex="{Binding SelectedLineComprasion}">
+                <ComboBoxItem Content="Логин"/>
+                <ComboBoxItem Content="Почта"/>
+                <ComboBoxItem Content="Полное"/>
+                <ComboBoxItem Content="Полное с заменой разделителя"/>
+            </ComboBox>
+            <TextBlock HorizontalAlignment="Left" Margin="10,16,0,0" Text="Сравнение:" VerticalAlignment="Top" FontSize="14"/>
+            <CheckBox Content="Добавлять в АП" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" FontSize="14" IsChecked="{Binding IsAddResultToAntipublic}"/>
+            <Button Content="Проверить" Margin="10,63,10,0" VerticalAlignment="Top" FontSize="14" Command="{Binding CheckBaseCommand}"/>
+            <CheckBox Content="Учитывать регистр" HorizontalAlignment="Left" Margin="137,40,0,0" VerticalAlignment="Top" FontSize="14" IsChecked="{Binding IsCaseSensitive}"/>
+        </Grid>
+        <Grid Margin="0,172,0,0" Height="87" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="29"/>
+                <RowDefinition Height="29"/>
+                <RowDefinition Height="189"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="10,10,5,0" Text="Количество строк в АП:" VerticalAlignment="Top" FontSize="14" Height="19"/>
+            <TextBlock Grid.Column="1" Margin="0,10,0,0" VerticalAlignment="Top" Text="{Binding NumberOfLinesInAntipublic}" Height="19" FontSize="14"/>
+            <TextBlock Margin="10,10,5,0" Grid.Row="1" Text="Количество строк в базе:" VerticalAlignment="Top" FontSize="14" Height="19"/>
+            <TextBlock Grid.Column="1" Margin="0,10,0,0" Grid.Row="1" Text="{Binding NumberOfLinesInBase}" VerticalAlignment="Top" FontSize="14" Height="19"/>
+            <TextBlock Margin="10,10,5,0" Grid.Row="2" Text="Количество уникальных строк в базе:" VerticalAlignment="Top" FontSize="14" Height="19"/>
+            <TextBlock Grid.Column="1" Margin="0,10,0,0" Grid.Row="2" Text="{Binding NumberOfUniqueLinesInBase}" VerticalAlignment="Top" FontSize="14" Height="19"/>
+        </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,264,0,0" Text="Затраченное время:" VerticalAlignment="Top" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="144,264,0,0" Text="{Binding ElapsedTime}" VerticalAlignment="Top" FontSize="14"/>
+    </Grid>
+</Window>
